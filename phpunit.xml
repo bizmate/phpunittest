@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+         bootstrap="tests/bootstrap.php" executionOrder="depends,defects" beStrictAboutOutputDuringTests="true"
+         failOnRisky="true" failOnWarning="true" testdox="true" cacheDirectory=".phpunit.cache"
+         requireCoverageMetadata="true" beStrictAboutCoverageMetadata="false"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true">
+  <php>
+    <ini name="error_reporting" value="E_ALL"/>
+    <ini name="display_errors" value="On" />
+    <ini name="display_startup_errors" value="On" />
+    <ini name="xdebug.mode" value="coverage"/>
+    <env name="KERNEL_CLASS" value="Bizmate\PhpunitTest\Kernel"/>
+    <env name="APP_ENV" value="test"/>
+    <env name="APP_DEBUG" value="1"/>
+    <env name="APP_SECRET" value="s$cretf0rt3st"/>
+    <env name="SHELL_VERBOSITY" value="-1"/>
+    <env name="XDEBUG_MODE" value="coverage"/>
+    <!-- define your env variables for the test env here -->
+  </php>
+  <testsuites>
+    <testsuite name="default">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <junit outputFile="reports/junit.xml"/>
+    <testdoxText outputFile="php://stdout"/>
+  </logging>
+  <coverage>
+    <report>
+      <clover outputFile="reports/clover.xml"/>
+      <html outputDirectory="reports/coverage-html" lowUpperBound="50" highLowerBound="90"/>
+      <text outputFile="php://stdout" showUncoveredFiles="false" showOnlySummary="false"/>
+    </report>
+  </coverage>
+  <source>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <exclude>
+      <file>src/Kernel.php</file>
+    </exclude>
+  </source>
+</phpunit>
